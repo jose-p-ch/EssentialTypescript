@@ -1,4 +1,4 @@
-function calculateTax(amount: number) {
+function calculateTax(amount: any): any {
     return (amount * 1.2).toFixed(2);
 }
 
