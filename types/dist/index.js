@@ -3,10 +3,17 @@ function calculateTax(amount, format) {
     return format ? `$${calcAmount.toFixed(2)}` : calcAmount;
 }
 let taxValue = calculateTax(100, false);
-if (typeof taxValue === "number") {
-    console.log(`Number Value: ${taxValue.toFixed(2)}`);
+switch (typeof taxValue) {
+    case "number":
+        console.log(`Number Value: ${taxValue.toFixed(2)}`);
+        break;
+    case "string":
+        console.log(`String Value: ${taxValue.charAt(0)}`);
+        break;
+    default:
+        let value = taxValue;
+        console.log(`Unexpected type for value: ${value}`);
 }
-else if (typeof taxValue === "string") {
-    //@ts-ignore
-    console.log(`String Value: ${taxValue.charAt(0)}`);
-}
+let newResult = calculateTax(200, false);
+let myNumber = newResult;
+console.log(`Number value: ${myNumber.toFixed(2)}`);
