@@ -7,6 +7,8 @@ function calculateTax(
     return (
       amount * 1.2 - discount + extraFees.reduce((total, val) => total + val, 0)
     );
+  } else {
+    return undefined;
   }
 }
 
