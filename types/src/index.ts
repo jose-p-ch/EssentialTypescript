@@ -1,14 +1,15 @@
-function calculateTax(amount: number): number;
-function calculateTax(amount: null): null;
-function calculateTax(amount: number | null): number | null {
-  if(amount != null){
-    return (amount * 1.2)
-  }
-  return null;
+function calculateTax(amount: number): number {
+  return amount * 1.2;
 }
 
-function writeValue(label: string, value: number): void {
-  console.log(`${label}: ${value}`);
+function writePrice(product: string, price: number): void {
+  console.log(`Price for ${product}: $${price.toFixed(2)}`);
 }
 
-writeValue("Tax value", calculateTax(100));
+let hatprice = 100;
+let glovesPrice = 75;
+let umbrellaPrice = 42;
+
+writePrice("Hat", hatprice);
+writePrice("Gloves", glovesPrice);
+writePrice("Umbrella", umbrellaPrice);

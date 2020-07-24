@@ -1,3 +1,5 @@
 declare function calculateTax(amount: number): number;
-declare function calculateTax(amount: null): null;
-declare function writeValue(label: string, value: number): void;
+declare function writePrice(product: string, price: number): void;
+declare let hatprice: number;
+declare let glovesPrice: number;
+declare let umbrellaPrice: number;
