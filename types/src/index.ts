@@ -6,9 +6,22 @@ function writePrice(product: string, price: number): void {
   console.log(`Price for ${product}: $${price.toFixed(2)}`);
 }
 
-let prices: number[] = [100, 75, 42];
-let names: string[] = ["Hat", "Gloves", "Umbrella"];
+let hat: [string, number] = ["Hat", 100];
+let gloves: [string, number] = ["gloves", 75];
 
-prices.forEach((price: number, index: number) => {
-  writePrice(names[index], calculateTax(price));
+let products: [string, number][] = [["Hat", 100], ["Gloves", 75]];
+let tupleUnion: ([string, number] | boolean)[] = [true, false, hat, ...products];
+
+tupleUnion.forEach((elem: [string, number] | boolean) => {
+  if (elem instanceof Array){
+    elem.forEach((tupleElem: string | number) => {
+      if (typeof tupleElem === "string"){
+        console.log(`String value: ${tupleElem}`);
+      } else {
+        console.log(`Number value: ${tupleElem}`);
+      }
+    })
+  } else if (typeof elem === "boolean"){
+    console.log(`Boolean value: ${elem}`)
+  }
 })
