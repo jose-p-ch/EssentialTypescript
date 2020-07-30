@@ -1,25 +1,7 @@
-function calculatePrice(quantity: 1 | 2, price: number) {
-  return quantity * price;
-}
+let hat = { name: "Hat", price: 100};
+let gloves = { name: "Gloves", price: 75};
+let umbrella = {name : "Umbrella"};
 
-let total = calculatePrice(2, 19.99);
-console.log(`Price: ${total}`);
+let products = [hat, gloves, umbrella];
 
-function getRandomValue(): 1 | 2 | 3 | 4 {
-  return (Math.floor(Math.random() * 4) + 1) as 1 | 2 | 3 | 4;
-}
-
-enum City {
-  London = "LON",
-  Paris = "PAR",
-  Chicago = "CHI",
-}
-
-type comboType = [string, number | true, 1 | 2 | 3 | City.London][];
-
-function getValue(input: comboType): comboType {
-  return [["Apples", 100, 2],["Oranges", true, 3]];
-}
-
-let result: comboType = getValue([["Bananas", true, 1]]);
-console.log(`Result: ${result}`);
+products.forEach(prod => console.log(`${prod.name}: ${prod.price}`));
