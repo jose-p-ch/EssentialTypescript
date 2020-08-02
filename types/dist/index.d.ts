@@ -8,8 +8,11 @@ declare let gloves: {
 };
 declare let umbrella: {
     name: string;
+    price: number;
+    waterproof: boolean;
 };
 declare let products: {
     name: string;
-    price: number;
+    price?: number;
+    waterproof?: boolean;
 }[];
