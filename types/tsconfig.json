@@ -7,5 +7,6 @@
         //"noImplicitAny": true,
         "strictNullChecks": true,
         //"noImplicitReturns": true
+        "suppressExcessPropertyErrors": true
     }
 }
