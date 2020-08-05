@@ -1,27 +1,17 @@
-function correlatedData(peopleData, staff) {
-    const defaults = { company: "None", dept: "None" };
-    return peopleData.map((p) => ({
-        ...p,
-        ...(staff.find((e) => e.id === p.id) || { ...defaults, id: p.id }),
-    }));
-}
-let people = [
-    { id: "bsmith", name: "Bob Smith", city: "London" },
-    { id: "ajones", name: "Alice Jones", city: "Paris" },
-    { id: "dpeters", name: "Dora Peters", city: "New York" },
-];
-let employees = [
-    { id: "bsmith", company: "Acme Co", dept: "Sales" },
-    { id: "dpeters", company: "Acme Co", dept: "Development" },
-];
-let dataItems = correlatedData(people, employees);
-function writePerson(per) {
-    console.log(`Person: ${per.id}, ${per.name}, ${per.city}`);
-}
-function writeEmployee(emp) {
-    console.log(`Employee: ${emp.id}, ${emp.company}, ${emp.dept}`);
-}
-dataItems.forEach((item) => {
-    writePerson(item);
-    writeEmployee(item);
-});
+let typeTest = {}.contact;
+let person1 = {
+    id: "bsmith",
+    name: "Bob Smith",
+    city: "London",
+    company: "Acme Co",
+    dept: "Sales",
+    contact: { name: "Alice", phone: 65123456543 },
+};
+let person2 = {
+    id: "dpeters",
+    name: "Dora Peters",
+    city: "New York",
+    company: "Acme Co",
+    dept: "Development",
+    contact: { name: "Alice", phone: 65123456543 },
+};

@@ -2,49 +2,34 @@ type Person = {
   id: string;
   name: string;
   city: string;
+  contact: { phone: number };
 };
 
 type Employee = {
   id: string;
   company: string;
   dept: string;
+  contact: { name: string };
 };
 
 type EmployedPerson = Person & Employee;
 
-function correlatedData(
-  peopleData: Person[],
-  staff: Employee[]
-): EmployedPerson[] {
-  const defaults = { company: "None", dept: "None" };
-  return peopleData.map((p) => ({
-    ...p,
-    ...(staff.find((e) => e.id === p.id) || { ...defaults, id: p.id }),
-  }));
-}
+let typeTest = ({} as EmployedPerson).contact;
 
-let people: Person[] = [
-  { id: "bsmith", name: "Bob Smith", city: "London" },
-  { id: "ajones", name: "Alice Jones", city: "Paris" },
-  { id: "dpeters", name: "Dora Peters", city: "New York" },
-];
+let person1: EmployedPerson = {
+  id: "bsmith",
+  name: "Bob Smith",
+  city: "London",
+  company: "Acme Co",
+  dept: "Sales",
+  contact: { name: "Alice", phone: 65123456543 },
+};
 
-let employees: Employee[] = [
-  { id: "bsmith", company: "Acme Co", dept: "Sales" },
-  { id: "dpeters", company: "Acme Co", dept: "Development" },
-];
-
-let dataItems: EmployedPerson[] = correlatedData(people, employees);
-
-function writePerson(per: Person): void {
-  console.log(`Person: ${per.id}, ${per.name}, ${per.city}`);
-}
-
-function writeEmployee(emp: Employee): void {
-  console.log(`Employee: ${emp.id}, ${emp.company}, ${emp.dept}`);
-}
-
-dataItems.forEach((item) => {
-  writePerson(item);
-  writeEmployee(item);
-});
+let person2: EmployedPerson = {
+  id: "dpeters",
+  name: "Dora Peters",
+  city: "New York",
+  company: "Acme Co",
+  dept: "Development",
+  contact: { name: "Alice", phone: 65123456543 },
+};
