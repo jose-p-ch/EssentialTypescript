@@ -15,7 +15,13 @@ let employees = [
     { id: "dpeters", company: "Acme Co", dept: "Development" },
 ];
 let dataItems = correlatedData(people, employees);
+function writePerson(per) {
+    console.log(`Person: ${per.id}, ${per.name}, ${per.city}`);
+}
+function writeEmployee(emp) {
+    console.log(`Employee: ${emp.id}, ${emp.company}, ${emp.dept}`);
+}
 dataItems.forEach((item) => {
-    console.log(`Person: ${item.id}, ${item.name}, ${item.city}`);
-    console.log(`Employee: ${item.id}, ${item.company}, ${item.dept}`);
+    writePerson(item);
+    writeEmployee(item);
 });
