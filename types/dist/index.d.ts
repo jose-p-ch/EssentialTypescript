@@ -1,9 +1,11 @@
-declare type Person = {
+declare class Person {
     id: string;
     name: string;
     city: string;
-};
-declare class Employee {
+    constructor(id: string, name: string, city: string);
+    writePers(): void;
+}
+declare class Employee extends Person {
     readonly id: string;
     name: string;
     private dept;

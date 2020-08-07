@@ -1,5 +1,17 @@
-class Employee {
+class Person {
+    constructor(id, name, city) {
+        this.id = id;
+        this.name = name;
+        this.city = city;
+    }
+    writePers() {
+        console.log(`${this.id} ${this.name}, ${this.city}`);
+    }
+}
+;
+class Employee extends Person {
     constructor(id, name, dept, city) {
+        super(id, name, city);
         this.id = id;
         this.name = name;
         this.dept = dept;
@@ -11,9 +23,9 @@ class Employee {
 }
 let salesEmployee = new Employee("fvega", "Fidel Vega", "Sales", "Paris");
 let data = [
-    { id: "bsmith", name: "Bob Smith", city: "London" },
-    { id: "ajonse", name: "Alice Jones", city: "Paris" },
-    { id: "dpeters", name: "Dora Peters", city: "New York" },
+    new Person("bsmith", "Bob Smith", "London"),
+    new Person("ajonse", "Alice Jones", "Paris"),
+    new Person("dpeters", "Dora Peters", "New York"),
     salesEmployee,
 ];
 data.forEach((item) => {
@@ -21,6 +33,6 @@ data.forEach((item) => {
         item.writeDept();
     }
     else {
-        console.log(`${item.id} ${item.name}, ${item.city}`);
+        item.writePers();
     }
 });

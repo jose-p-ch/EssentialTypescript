@@ -1,20 +1,15 @@
-type Person = {
-  id: string;
-  name: string;
-  city: string;
+class Person {
+  constructor(public id: string, public name: string, public city: string){}
+
+  writePers(): void {
+    console.log(`${this.id} ${this.name}, ${this.city}`)
+  }
 };
 
-class Employee {
-  public readonly id: string;
-  public name: string;
-  private dept: string;
-  public city: string;
+class Employee extends Person{
 
-  constructor(id: string, name: string, dept: string, city: string) {
-    this.id = id;
-    this.name = name;
-    this.dept = dept;
-    this.city = city;
+  constructor(public readonly id: string, public name: string, private dept: string, public city: string) {
+    super(id, name, city);
   }
 
   writeDept(): void {
@@ -25,9 +20,9 @@ class Employee {
 let salesEmployee = new Employee("fvega", "Fidel Vega", "Sales", "Paris");
 
 let data: (Person | Employee)[] = [
-  { id: "bsmith", name: "Bob Smith", city: "London" },
-  { id: "ajonse", name: "Alice Jones", city: "Paris" },
-  { id: "dpeters", name: "Dora Peters", city: "New York" },
+  new Person("bsmith", "Bob Smith", "London"),
+  new Person("ajonse", "Alice Jones", "Paris"),
+  new Person("dpeters", "Dora Peters", "New York"),
   salesEmployee,
 ];
 
@@ -35,6 +30,6 @@ data.forEach((item) => {
   if (item instanceof Employee) {
     item.writeDept();
   } else {
-    console.log(`${item.id} ${item.name}, ${item.city}`);
+    item.writePers();
   }
 });
