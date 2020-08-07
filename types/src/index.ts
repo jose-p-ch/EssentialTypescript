@@ -4,37 +4,37 @@ type Person = {
   city: string;
 };
 
-type Employee = {
-  id: string,
-  name: string,
-  dept: string,
-  city: string,
-  writeDept: () => void
-}
+class Employee {
+  public readonly id: string;
+  public name: string;
+  private dept: string;
+  public city: string;
 
-let Employee = function(id: string, name: string, dept: string, city: string) {
-  this.id = id;
-  this.name = name;
-  this.dept = dept;
-  this.city = city;
-};
+  constructor(id: string, name: string, dept: string, city: string) {
+    this.id = id;
+    this.name = name;
+    this.dept = dept;
+    this.city = city;
+  }
 
-Employee.prototype.writeDept = function() {
-  console.log(`${this.name} works in ${this.dept}`);
+  writeDept(): void {
+    console.log(`${this.name} works in ${this.dept}`);
+  }
 }
 
 let salesEmployee = new Employee("fvega", "Fidel Vega", "Sales", "Paris");
 
-let data: (Person | Employee )[] =
-  [{id: "bsmith", name: "Bob Smith", city: "London"},
-  {id: "ajonse", name: "Alice Jones", city: "Paris"},
-  {id: "dpeters", name: "Dora Peters", city: "New York"},
-salesEmployee];
+let data: (Person | Employee)[] = [
+  { id: "bsmith", name: "Bob Smith", city: "London" },
+  { id: "ajonse", name: "Alice Jones", city: "Paris" },
+  { id: "dpeters", name: "Dora Peters", city: "New York" },
+  salesEmployee,
+];
 
-data.forEach( item => {
-  if ("dept" in item) {
+data.forEach((item) => {
+  if (item instanceof Employee) {
     item.writeDept();
-  } else{
+  } else {
     console.log(`${item.id} ${item.name}, ${item.city}`);
   }
-})
+});
