@@ -1,9 +1,5 @@
 class Person {
   constructor(public id: string, public name: string, public city: string){}
-
-  writePers(): void {
-    console.log(`${this.id} ${this.name}, ${this.city}`)
-  }
 };
 
 class Employee extends Person{
@@ -17,19 +13,33 @@ class Employee extends Person{
   }
 }
 
-let salesEmployee = new Employee("fvega", "Fidel Vega", "Sales", "Paris");
+class Customer extends Person {
+  constructor(public readonly id: string, public name: string, public city: string,
+    public creditLimit: number) {
+      super(id, name, city);
+    }
+}
 
-let data: (Person | Employee)[] = [
-  new Person("bsmith", "Bob Smith", "London"),
-  new Person("ajonse", "Alice Jones", "Paris"),
-  new Person("dpeters", "Dora Peters", "New York"),
-  salesEmployee,
+class Supplier extends Person {
+  constructor(public readonly id: string, public name: string, public city: string,
+    public companyName: string) {
+      super(id, name, city);
+    }
+}
+
+let data: Person[] = [
+  new Employee("fvega", "Fidel Vega", "Sales", "Paris"),
+  new Customer("ajonse", "Alice Jones", "London", 500)
 ];
+
+data.push(new Supplier("dpeters", "Dora Peters", "New York", "Acme"));
 
 data.forEach((item) => {
   if (item instanceof Employee) {
     item.writeDept();
-  } else {
-    item.writePers();
+  } else if (item instanceof Customer){
+    console.log(`Customer ${item.name} has ${item.creditLimit} limit`);
+  } else if (item instanceof Supplier){
+    console.log(`Supplier ${item.name} works for ${item.companyName}`)
   }
 });

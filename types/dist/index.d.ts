@@ -3,7 +3,6 @@ declare class Person {
     name: string;
     city: string;
     constructor(id: string, name: string, city: string);
-    writePers(): void;
 }
 declare class Employee extends Person {
     readonly id: string;
@@ -13,5 +12,18 @@ declare class Employee extends Person {
     constructor(id: string, name: string, dept: string, city: string);
     writeDept(): void;
 }
-declare let salesEmployee: Employee;
-declare let data: (Person | Employee)[];
+declare class Customer extends Person {
+    readonly id: string;
+    name: string;
+    city: string;
+    creditLimit: number;
+    constructor(id: string, name: string, city: string, creditLimit: number);
+}
+declare class Supplier extends Person {
+    readonly id: string;
+    name: string;
+    city: string;
+    companyName: string;
+    constructor(id: string, name: string, city: string, companyName: string);
+}
+declare let data: Person[];
