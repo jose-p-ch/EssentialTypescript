@@ -1,38 +1,37 @@
-abstract class Person {
-  constructor(public id: string, public name: string, public city: string){}
+interface Person {
+  name: string;
+  getDetails(): string;
+}
 
-  getDetails(): string {
-    return `${this.name}, ${this.getSpecificDetails()}`;
-  }
+class Employee implements Person {
+  constructor(
+    public readonly id: string,
+    public name: string,
+    private dept: string,
+    public city: string
+  ) {}
 
-  abstract getSpecificDetails(): string;
-};
-
-class Employee extends Person{
-
-  constructor(public readonly id: string, public name: string, private dept: string, public city: string) {
-    super(id, name, city);
-  }
-
-  getSpecificDetails() {
-    return `works in ${this.dept}`;
+  getDetails() {
+    return `${this.name} works in ${this.dept}`;
   }
 }
 
-class Customer {
-  constructor(public readonly id: string, public name: string, public city: string,
-    public creditLimit: number) {}
+class Customer implements Person {
+  constructor(
+    public readonly id: string,
+    public name: string,
+    public city: string,
+    public creditLimit: number
+  ) {}
+
+  getDetails() {
+    return `${this.name} has ${this.creditLimit} limit`;
+  }
 }
 
-let data: (Person | Customer)[] = [
+let data: Person[] = [
   new Employee("fvega", "Fidel Vega", "Sales", "Paris"),
-  new Customer("ajonse", "Alice Jones", "London", 500)
+  new Customer("ajonse", "Alice Jones", "London", 500),
 ];
 
-data.forEach((item) => {
-  if (item instanceof Person){
-    console.log(item.getDetails());
-  } else {
-    console.log(`Customer: ${item.name}`);
-  }
-});
+data.forEach((item) => console.log(item.getDetails()));
