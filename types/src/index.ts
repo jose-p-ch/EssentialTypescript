@@ -19,33 +19,20 @@ class Employee extends Person{
   }
 }
 
-class Customer extends Person {
+class Customer {
   constructor(public readonly id: string, public name: string, public city: string,
-    public creditLimit: number) {
-      super(id, name, city);
-  }
-
-  getSpecificDetails() {
-    return `has ${this.creditLimit} limit`;
-  }
+    public creditLimit: number) {}
 }
 
-class Supplier extends Person {
-  constructor(public readonly id: string, public name: string, public city: string,
-    public companyName: string) {
-      super(id, name, city);
-  }
-
-  getSpecificDetails() {
-    return `works for ${this.companyName}`;
-  }
-}
-
-let data: Person[] = [
+let data: (Person | Customer)[] = [
   new Employee("fvega", "Fidel Vega", "Sales", "Paris"),
   new Customer("ajonse", "Alice Jones", "London", 500)
 ];
 
-data.push(new Supplier("dpeters", "Dora Peters", "New York", "Acme"));
-
-data.forEach((item) => console.log(item.getDetails()));
+data.forEach((item) => {
+  if (item instanceof Person){
+    console.log(item.getDetails());
+  } else {
+    console.log(`Customer: ${item.name}`);
+  }
+});
