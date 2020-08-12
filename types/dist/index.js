@@ -26,7 +26,7 @@ class Customer {
 }
 let alice = new Customer("ajones", "Alice Jones", "London", 500, "Fido");
 let dogOwners = [alice];
-dogOwners.forEach(item => console.log(item.getDogDetails));
+dogOwners.forEach(item => console.log(item.getDogDetails()));
 let data = [
     new Employee("fvega", "Fidel Vega", "Sales", "Paris"),
     alice

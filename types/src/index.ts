@@ -42,7 +42,7 @@ class Customer implements Person, DogOwner {
 let alice = new Customer("ajones", "Alice Jones", "London", 500, "Fido");
 
 let dogOwners: DogOwner[] = [alice];
-dogOwners.forEach(item => console.log(item.getDogDetails));
+dogOwners.forEach(item => console.log(item.getDogDetails()));
 
 let data: Person[] = [
   new Employee("fvega", "Fidel Vega", "Sales", "Paris"),
