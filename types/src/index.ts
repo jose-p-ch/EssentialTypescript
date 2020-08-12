@@ -1,48 +1,39 @@
 interface Person {
   name: string;
   getDetails(): string;
-
-  dogName?: string;
-  getDogDetails?(): string;
 }
 
-abstract class AbstractDogOwner implements Person {
-  abstract name: string;
-  abstract dogName?: string;
-
-  abstract getDetails();
-
-  getDogDetails() {
-    if (this.dogName) {
-      return `${this.name} has a dog named ${this.dogName}`;
-    }
-  }
+interface Product {
+  name: string;
+  price: number;
 }
 
-class DogOwningCustomer extends AbstractDogOwner {
-  constructor(
-    public readonly id: string,
-    public name: string,
-    public city: string,
-    public creditLimit: number,
-    public dogName
-  ) {
-    super();
-  }
+class Employee implements Person {
+  constructor(public name: string, public company: string) {}
 
   getDetails() {
-    return `${this.name} has ${this.creditLimit} limit`;
+    return `${this.name} works for ${this.company}`;
   }
 }
 
-let alice = new DogOwningCustomer(
-  "ajones",
-  "Alice Jones",
-  "London",
-  500,
-  "Fido"
-);
-
-if (alice.getDogDetails) {
-  console.log(alice.getDogDetails());
+class Sportsproduct implements Product {
+  constructor(
+    public name: string,
+    public category: string,
+    public price: number
+  ) {}
 }
+
+let data: (Person | Product)[] = [
+  new Employee("Bob Smith", "Acme"),
+  new Sportsproduct("Running Shoes", "Running", 90.5),
+  new Employee("Dora Peters", "BigCo"),
+];
+
+data.forEach((item) => {
+  if("getDetails" in item){
+    console.log(`Person: ${item.getDetails()}`);
+  } else {
+    console.log(`Product: ${item.name}, ${item.price}`);
+  }
+});
