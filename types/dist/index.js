@@ -1,24 +1,26 @@
-class Employee {
-    constructor(name, company) {
-        this.name = name;
-        this.company = company;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const dataTypes_1 = require("./dataTypes");
+let people = [new dataTypes_1.Person("Bob Smith", "London"),
+    new dataTypes_1.Person("Dora Peters", "New York")];
+let products = [new dataTypes_1.Product("Running Shoes", 100),
+    new dataTypes_1.Product("Hat", 25)];
+class PeopleCollection {
+    constructor(initialItems) {
+        this.items = [];
+        this.items.push(...initialItems);
     }
-    getDetails() {
-        return `${this.name} works for ${this.company}`;
+    add(newItem) {
+        this.items.push(newItem);
+    }
+    getNames() {
+        return this.items.map(item => item.name);
+    }
+    getItem(index) {
+        return this.items[index];
     }
 }
-class Sportsproduct {
-    constructor(name, category, price) {
-        this.name = name;
-        this.category = category;
-        this.price = price;
-    }
-}
-class ProductGroup {
-    constructor(...initialProducts) {
-        initialProducts.forEach(p => this[p[0]] = p[1]);
-    }
-}
-let group = new ProductGroup(["shoes", new Sportsproduct("Shoes", "Running", 90.50)]);
-group.hat = new Sportsproduct("Hat", "Skiing", 20);
-Object.keys(group).forEach(k => console.log(`Property Name: ${k}`));
+let peopleData = new PeopleCollection(people);
+console.log(`Names: ${peopleData.getNames().join(", ")}`);
+let firstPerson = peopleData.getItem(0);
+console.log(`First Person: ${firstPerson.name}, ${firstPerson.city}`);

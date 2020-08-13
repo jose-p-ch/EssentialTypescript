@@ -1,37 +1,32 @@
-interface Person {
-  name: string;
-  getDetails(): string;
-}
+import { Person, Product } from "./dataTypes";
 
-interface Product {
-  name: string;
-  price: number;
-}
+let people = [new Person("Bob Smith", "London"),
+new Person("Dora Peters", "New York")];
+let products = [new Product("Running Shoes", 100),
+new Product("Hat", 25)];
 
-class Employee implements Person {
-  constructor(public name: string, public company: string) {}
+class PeopleCollection {
+  private items: Person[] = [];
 
-  getDetails() {
-    return `${this.name} works for ${this.company}`;
+  constructor(initialItems: Person[]){
+    this.items.push(...initialItems);
+  }
+
+  add(newItem: Person){
+    this.items.push(newItem);
+  }
+
+  getNames(): string[] {
+    return this.items.map(item => item.name);
+  }
+
+  getItem(index: number) {
+    return this.items[index];
   }
 }
 
-class Sportsproduct implements Product {
-  constructor(
-    public name: string,
-    public category: string,
-    public price: number
-  ) {}
-}
+let peopleData = new PeopleCollection(people);
 
-class ProductGroup {
-  constructor(...initialProducts: [string,Product][]){
-    initialProducts.forEach(p => this[p[0]] =p[1]);
-  }
-
-  [property: string]: Product;
-}
-
-let group = new ProductGroup(["shoes", new Sportsproduct("Shoes", "Running", 90.50)]);
-group.hat = new Sportsproduct("Hat", "Skiing", 20);
-Object.keys(group).forEach(k => console.log(`Property Name: ${k}`));
+console.log(`Names: ${peopleData.getNames().join(", ")}`);
+let firstPerson = peopleData.getItem(0);
+console.log(`First Person: ${firstPerson.name}, ${firstPerson.city}`);

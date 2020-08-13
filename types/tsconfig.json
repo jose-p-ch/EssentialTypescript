@@ -4,6 +4,7 @@
         "outDir": "./dist",
         "rootDir": "./src",
         "declaration": true,
+        "module": "CommonJS"
         //"noImplicitAny": true,
         //"strictNullChecks": true,
         //"noImplicitReturns": true
