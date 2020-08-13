@@ -14,16 +14,11 @@ class Sportsproduct {
         this.price = price;
     }
 }
-let data = [
-    new Employee("Bob Smith", "Acme"),
-    new Sportsproduct("Running Shoes", "Running", 90.5),
-    new Employee("Dora Peters", "BigCo"),
-];
-data.forEach((item) => {
-    if ("getDetails" in item) {
-        console.log(`Person: ${item.getDetails()}`);
+class ProductGroup {
+    constructor(...initialProducts) {
+        initialProducts.forEach(p => this[p[0]] = p[1]);
     }
-    else {
-        console.log(`Product: ${item.name}, ${item.price}`);
-    }
-});
+}
+let group = new ProductGroup(["shoes", new Sportsproduct("Shoes", "Running", 90.50)]);
+group.hat = new Sportsproduct("Hat", "Skiing", 20);
+Object.keys(group).forEach(k => console.log(`Property Name: ${k}`));

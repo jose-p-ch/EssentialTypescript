@@ -24,16 +24,14 @@ class Sportsproduct implements Product {
   ) {}
 }
 
-let data: (Person | Product)[] = [
-  new Employee("Bob Smith", "Acme"),
-  new Sportsproduct("Running Shoes", "Running", 90.5),
-  new Employee("Dora Peters", "BigCo"),
-];
-
-data.forEach((item) => {
-  if("getDetails" in item){
-    console.log(`Person: ${item.getDetails()}`);
-  } else {
-    console.log(`Product: ${item.name}, ${item.price}`);
+class ProductGroup {
+  constructor(...initialProducts: [string,Product][]){
+    initialProducts.forEach(p => this[p[0]] =p[1]);
   }
-});
+
+  [property: string]: Product;
+}
+
+let group = new ProductGroup(["shoes", new Sportsproduct("Shoes", "Running", 90.50)]);
+group.hat = new Sportsproduct("Hat", "Skiing", 20);
+Object.keys(group).forEach(k => console.log(`Property Name: ${k}`));
