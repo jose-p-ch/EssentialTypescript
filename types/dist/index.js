@@ -5,6 +5,8 @@ let people = [new dataTypes_1.Person("Bob Smith", "London"),
     new dataTypes_1.Person("Dora Peters", "New York")];
 let products = [new dataTypes_1.Product("Running Shoes", 100),
     new dataTypes_1.Product("Hat", 25)];
+let cities = [new dataTypes_1.City("London", 8136000),
+    new dataTypes_1.City("Paris", 2141000)];
 class DataCollection {
     constructor(initialItems) {
         this.items = [];
@@ -28,3 +30,5 @@ let productData = new DataCollection(products);
 let firstProduct = productData.getItem(0);
 console.log(`First Product: ${firstProduct.name}, ${firstProduct.price}`);
 console.log(`Product Names: ${productData.getNames().join(", ")}`);
+let cityData = new DataCollection(cities);
+console.log(`City Names: ${cityData.getNames().join(", ")}`);
