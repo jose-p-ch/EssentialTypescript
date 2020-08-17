@@ -13,16 +13,18 @@ class DataCollection {
     add(newItem) {
         this.items.push(newItem);
     }
-    /* getNames(): string[] {
-      return this.items.map(item => item.name);
-    } */
+    getNames() {
+        return this.items.map(item => item.name);
+    }
     getItem(index) {
         return this.items[index];
     }
 }
 let peopleData = new DataCollection(people);
-//console.log(`Names: ${peopleData.getNames().join(", ")}`);
 let firstPerson = peopleData.getItem(0);
-//if(firstPerson instanceof Person){
 console.log(`First Person: ${firstPerson.name}, ${firstPerson.city}`);
-//}
+console.log(`Person Names: ${peopleData.getNames().join(", ")}`);
+let productData = new DataCollection(products);
+let firstProduct = productData.getItem(0);
+console.log(`First Product: ${firstProduct.name}, ${firstProduct.price}`);
+console.log(`Product Names: ${productData.getNames().join(", ")}`);
