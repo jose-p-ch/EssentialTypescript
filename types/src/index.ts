@@ -5,14 +5,16 @@ new Person("Dora Peters", "New York")];
 let products = [new Product("Running Shoes", 100),
 new Product("Hat", 25)];
 
-class PeopleCollection {
-  private items: Person[] = [];
+type dataType = Person | Product;
 
-  constructor(initialItems: Person[]){
+class DataCollection {
+  private items: dataType[] = [];
+
+  constructor(initialItems: dataType[]){
     this.items.push(...initialItems);
   }
 
-  add(newItem: Person){
+  add(newItem: dataType){
     this.items.push(newItem);
   }
 
@@ -20,13 +22,15 @@ class PeopleCollection {
     return this.items.map(item => item.name);
   }
 
-  getItem(index: number) {
+  getItem(index: number): dataType {
     return this.items[index];
   }
 }
 
-let peopleData = new PeopleCollection(people);
+let peopleData = new DataCollection(people);
 
 console.log(`Names: ${peopleData.getNames().join(", ")}`);
 let firstPerson = peopleData.getItem(0);
-console.log(`First Person: ${firstPerson.name}, ${firstPerson.city}`);
+if(firstPerson instanceof Person){
+  console.log(`First Person: ${firstPerson.name}, ${firstPerson.city}`);
+}
