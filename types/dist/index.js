@@ -13,16 +13,16 @@ class DataCollection {
     add(newItem) {
         this.items.push(newItem);
     }
-    getNames() {
-        return this.items.map(item => item.name);
-    }
+    /* getNames(): string[] {
+      return this.items.map(item => item.name);
+    } */
     getItem(index) {
         return this.items[index];
     }
 }
 let peopleData = new DataCollection(people);
-console.log(`Names: ${peopleData.getNames().join(", ")}`);
+//console.log(`Names: ${peopleData.getNames().join(", ")}`);
 let firstPerson = peopleData.getItem(0);
-if (firstPerson instanceof dataTypes_1.Person) {
-    console.log(`First Person: ${firstPerson.name}, ${firstPerson.city}`);
-}
+//if(firstPerson instanceof Person){
+console.log(`First Person: ${firstPerson.name}, ${firstPerson.city}`);
+//}
