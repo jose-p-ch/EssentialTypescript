@@ -28,18 +28,17 @@ class DataCollection<T extends { name: string }> {
   }
 }
 
-class SearchableCollection<T extends { name: string }> extends DataCollection<T>{
-  constructor(initialitems: T[]){
+class SearchableCollection extends DataCollection<Employee>{
+  constructor(initialitems: Employee[]){
     super(initialitems);
   }
 
-  find(name: string): T | undefined {
-    return this.items.find(item => item.name === name);
+  find(searchTerm: string): Employee[] {
+    return this.items.filter(item => 
+      item.name === searchTerm || item.role === searchTerm);
   }
 }
 
-let peopleData = new SearchableCollection<Person>(people);
-let foundPerson = peopleData.find("Bob Smith");
-if(foundPerson !== undefined){
-  console.log(`${foundPerson.name}, ${foundPerson.city}`);
-}
+let employeeData = new SearchableCollection(employees);
+employeeData.find("Sales").forEach(e =>
+  console.log(`Employee ${ e.name }, ${ e.role }`));
