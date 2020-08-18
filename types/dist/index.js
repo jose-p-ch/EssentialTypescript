@@ -25,8 +25,16 @@ class DataCollection {
         return results;
     }
 }
-let peopleData = new DataCollection(people);
-let collatedData = peopleData.collate(cities, "city", "name");
-collatedData.forEach(c => console.log(`${c.name}, ${c.city}, ${c.population}`));
-let empData = peopleData.collate(employees, "name", "name");
-empData.forEach(c => console.log(`${c.name}, ${c.city}, ${c.role}`));
+class SearchableCollection extends DataCollection {
+    constructor(initialitems) {
+        super(initialitems);
+    }
+    find(name) {
+        return this.items.find(item => item.name === name);
+    }
+}
+let peopleData = new SearchableCollection(people);
+let foundPerson = peopleData.find("Bob Smith");
+if (foundPerson !== undefined) {
+    console.log(`${foundPerson.name}, ${foundPerson.city}`);
+}
