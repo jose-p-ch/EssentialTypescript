@@ -9,41 +9,21 @@ new City("Paris", 2141000)];
 let employees = [new Employee("Bob Smith", "Sales"),
 new Employee("Alice Jones", "Sales")];
 
-class DataCollection<T extends { name: string }> {
+class DataCollection<T> {
   protected items: T[] = [];
 
   constructor(initialItems: T[]){
     this.items.push(...initialItems);
   }
 
-  collate<U>(targetData: U[], itemProp: string, targetProp: string): (T & U)[] {
-    let results = [];
-    this.items.forEach(item => {
-      let match = targetData.find(d => d[targetProp] === item[itemProp]);
-      if(match !== undefined){
-        results.push({...match, ...item});
-      }
-    });
-    return results;
+  filter<V extends T>(predicate: (target) => target is V): V[] {
+    return this.items.filter(item => predicate(item)) as V[];
   }
 }
 
-class SearchableCollection<T extends Employee | Person> extends DataCollection<T>{
-  constructor(initialitems: T[]){
-    super(initialitems);
-  }
-
-  find(searchTerm: string): T[] {
-    return this.items.filter(item => {
-      if (item instanceof Employee){
-        return item.name === searchTerm || item.role === searchTerm;
-      } else if (item instanceof Person){
-        return item.name === searchTerm || item.city === searchTerm;
-      }
-    });
-  }
+let mixedData = new DataCollection<Person | Product>([...people, ...products]);
+function isProduct(target): target is Product {
+  return target instanceof Product;
 }
-
-let employeeData = new SearchableCollection<Employee>(employees);
-employeeData.find("Sales").forEach(e =>
-  console.log(`Employee ${ e.name }, ${ e.role }`));
+let filteredProducts = mixedData.filter<Product>(isProduct);
+filteredProducts.forEach(p => console.log(`Product: ${p.name}, ${p.price}`));
