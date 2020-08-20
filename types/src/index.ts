@@ -1,36 +1,21 @@
 import { City, Employee, Person, Product } from "./dataTypes";
 
-let people = [new Person("Bob Smith", "London"),
-new Person("Dora Peters", "New York")];
-let products = [new Product("Running Shoes", 100),
-new Product("Hat", 25)];
-let cities = [new City("London", 8136000),
-new City("Paris", 2141000)];
-let employees = [new Employee("Bob Smith", "Sales"),
-new Employee("Alice Jones", "Sales")];
+type shapeType = { name: string };
 
-class DataCollection<T> {
-  protected items: T[] = [];
-
-  constructor(initialItems: T[]){
-    this.items.push(...initialItems);
-  }
-
-  filter<V extends T>(predicate: (target) => target is V): V[] {
-    return this.items.filter(item => predicate(item)) as V[];
-  }
-
-  static reverse<ArrayType>(items: ArrayType[]): ArrayType[] {
-    return items.reverse();
-  }
+interface Collection<T extends shapeType> {
+  add(...newItems: T[]): void;
+  get(name: string): T;
+  count: number;
 }
 
-let mixedData = new DataCollection<Person | Product>([...people, ...products]);
-function isProduct(target): target is Product {
-  return target instanceof Product;
+interface SearchableCollection<T extends shapeType> extends Collection<T> {
+  find(name: string): T | undefined;
 }
-let filteredProducts = mixedData.filter<Product>(isProduct);
-filteredProducts.forEach(p => console.log(`Product: ${p.name}, ${p.price}`));
 
-let reversedCities: City[] = DataCollection.reverse<City>(cities);
-reversedCities.forEach(c => console.log(`City: ${c.name}, ${c.population}`));
+interface ProductCollection extends Collection<Product> {
+  sumPrices(): number;
+}
+
+interface PeopleCollection<T extends Person | Employee> extends Collection<T> {
+  getNames(): string[];
+}
