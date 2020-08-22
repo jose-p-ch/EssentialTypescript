@@ -1,11 +1,11 @@
 import { City, Person, Employee, Product } from "./dataTypes";
  
-type Mapped<T> = {
-  [P in keyof T] : T[P];
+type SelectProperties<T, K extends keyof T> = {
+  [P in K]: T[P]
 }
 
-let p: Mapped<Product> = { name: "Kayak", price: 275};
-console.log(`Mapped type: ${p.name}, ${p.price}`);
+let p1: SelectProperties<Product, "name"> = { name: "Kayak"};
+let p2: Pick<Product, "name"|"price"> = { name: "Lifejacket", price: 48.95};
 
-let c: Mapped<City> = { name: "London", population: 8136000};
-console.log(`Mapped type: ${c.name}, ${c.population}`);
+console.log(`Custom mapped type: ${p1.name}`);
+console.log(`Built-in mapped type: ${p2.name}, ${p2.price}`)

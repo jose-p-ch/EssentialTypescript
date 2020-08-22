@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-let p = { name: "Kayak", price: 275 };
-console.log(`Mapped type: ${p.name}, ${p.price}`);
-let c = { name: "London", population: 8136000 };
-console.log(`Mapped type: ${c.name}, ${c.population}`);
+let p1 = { name: "Kayak" };
+let p2 = { name: "Lifejacket", price: 48.95 };
+console.log(`Custom mapped type: ${p1.name}`);
+console.log(`Built-in mapped type: ${p2.name}, ${p2.price}`);
