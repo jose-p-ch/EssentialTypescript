@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-let p1 = { name: "Bob", city: "London" };
-let p2 = { name: "Alice", city: "Paris" };
-console.log(`Custom mapped type: ${p1.name}, ${p1.city}`);
-console.log(`Built-in mapped type: ${p2.name}, ${p2.city}`);
+const dataTypes_1 = require("./dataTypes");
+let firstVal = "String Value";
+let secondVal = 100;
+let firstNest = new dataTypes_1.City("London", 8136000);
+let secondNest = new dataTypes_1.Person("Bob", "London");
+let thirdNest = new dataTypes_1.Product("Kayak", 275);
+//let mismatchCheck: resultType<false> = "String Value";
