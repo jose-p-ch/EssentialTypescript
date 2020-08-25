@@ -1,16 +1,14 @@
 import { City, Person, Employee, Product } from "./dataTypes";
  
-type Filter<T, U> = T extends U ? never : T;
-
-function FilterArray<T, U>(data: T[], predicate: (item) => item is U): Filter<T, U>[] {
-  return data.filter(item => !predicate(item)) as any;
+type changeProps<T, U, V> = {
+  [P in keyof T]: T[P] extends U ? V: T[P]
 }
 
-let dataArray = [new Product("Kayak", 275), new Person("Bob", "London"), new Product("Lifejacket", 27.50)];
+type modifiedProduct = changeProps<Product, number, string>;
 
-function isProduct (item: any): item is Product {
-  return item instanceof Product;
+function convertProduct(p: Product,): modifiedProduct {
+  return { name: p.name, price: `$${p.price.toFixed(2)}`};
 }
 
-let filteredData: Person[] = FilterArray(dataArray, isProduct);
-filteredData.forEach(item => console.log(`Person: ${item.name}`));
+let kayak = convertProduct(new Product("Kayak", 275));
+console.log(`Product: ${kayak.name}, ${kayak.price}`);
