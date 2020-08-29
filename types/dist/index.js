@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const dataTypes_1 = require("./dataTypes");
 function getValue(data, propName) {
     if (Array.isArray(data)) {
-        return data[0].propName;
+        return data[0][propName];
     }
     else {
         return data[propName];
